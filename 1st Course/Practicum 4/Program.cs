@@ -7,19 +7,20 @@ namespace P1_10
         static void Main(string[] args)
         {
             Console.Write("Алгоритм: найти число, которое является суммой наибольшего и наименьшего простого множителя заданного числа.\nВведите число N: ");
-            uint N = uint.Parse(Console.ReadLine()), FirstD = 0, LastD = 0;
-            uint mem_N = N;
+            uint N = uint.Parse(Console.ReadLine()), d1 = 0, d2 = 0;
+            Console.Write("Для числа {0} сумма его наибольшего и наименьшего простых множителей ", N);
             for (uint d = 2; N != 1; d++)
             {
                 while (N % d == 0)
-                {
                     N /= d;
+                if (d1 == 0)
+                {
+                    d1 = d;
+                    Console.Write("{0} и ", d);
                 }
-                if (FirstD == 0)
-                    FirstD = d;
-                else LastD = d;
+                else d2 = d;
             }
-            Console.WriteLine("Для числа {0} сумма его наибольшего и наименьшего простых множителей равна {1}.", mem_N, FirstD + LastD);
+            Console.WriteLine("{0} равна {1}.\n", d2, d1 + d2);
         }
     }
 }
