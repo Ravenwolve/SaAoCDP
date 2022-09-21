@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Security.Cryptography;
 
 namespace P1_10
@@ -58,10 +58,10 @@ namespace P1_10
             Console.Write("d) Для заданного числа А вывести на экран ближайшее следующее за ним число, медиана делителей которого равна медиане делителей числа А. Введите число A: ");
             uint A = uint.Parse(Console.ReadLine());
             middle = middle_div(A);
-            for (uint i = A + 1; true; i++)
+            for (uint i = A + 1; i < A + 1000; i++)
                 if (middle_div(i) == middle)
                 {
-                    Console.Write("Ближайшее следующее число за {0} это {1}.", A, i);
+                    Console.WriteLine("Ближайшее следующее число за {0} это {1}.", A, i);
                     break;
                 }
         }
