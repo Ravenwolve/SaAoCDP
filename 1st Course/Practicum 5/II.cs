@@ -1,27 +1,19 @@
 using System;
 using System.Security.Cryptography;
-
+using System.Collections;
 namespace P1_10
 {
     internal class Program
     {
         static double middle_div(uint n)
         {
-            double mid = 0;
-            uint root = (uint)Math.Sqrt(n);
-            if (root * root != n)
+            ArrayList divides = new ArrayList();
+            for (uint d = 2; d <= n / 2; d++)
             {
-                for (uint d = root; d > 0; d--) //Ищем правый серединный элемент
-                    if (n % d == 0)
-                    {
-                        mid = d;
-                        break;
-                    }
-                for (uint d = root + 1; d <= n; d++) //Ищем левый серединный элемент
-                    if (n % d == 0)
-                        return (mid + d) / 2; //у непростых и неквадратов четное количество делителей, медиана в таком случае считается как среднее арифметическое между двумя серединными
+                if (n % d == 0)
+                    divides.Add(d);
             }
-            return root; //если число - квадрат, то медианой будет его квадратный корень
+            return (divides[(divides.length) / 2] + divides[(divides.length - 1) / 2]) / 2;
         }
         static void Main(string[] args)
         {
