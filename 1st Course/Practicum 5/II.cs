@@ -1,19 +1,17 @@
 using System;
-using System.Security.Cryptography;
-using System.Collections;
+using System.Collections.Generic;
 namespace P1_10
 {
     internal class Program
     {
         static double middle_div(uint n)
         {
-            ArrayList divides = new ArrayList();
-            for (uint d = 2; d <= n / 2; d++)
-            {
+            List<double> divides = new List<double>();
+            for (uint d = 1; d <= n / 2; d++)
                 if (n % d == 0)
                     divides.Add(d);
-            }
-            return (divides[(divides.length) / 2] + divides[(divides.length - 1) / 2]) / 2;
+            divides.Add(n);
+            return (divides[divides.Count / 2] + divides[(divides.Count - 1) / 2]) / 2;
         }
         static void Main(string[] args)
         {
