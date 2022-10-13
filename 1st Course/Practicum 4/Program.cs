@@ -7,9 +7,10 @@ namespace P1_10
         static void Main(string[] args)
         {
             Console.Write("Алгоритм: найти число, которое является суммой наибольшего и наименьшего простого множителя заданного числа.\nВведите число N: ");
-            uint N = uint.Parse(Console.ReadLine()), d1 = 0, d2 = 0;
+            uint N = uint.Parse(Console.ReadLine()), div_min = 0, div_max = 0;
             Console.Write("Для числа {0} ", N);
-            if (N == 1 || N == 0) {
+            if (N == 1 || N == 0)
+            {
                 Console.WriteLine("нет делителей.");
             }
             else
@@ -17,17 +18,18 @@ namespace P1_10
                 for (uint n = N, d = 2; n != 1; d++)
                     if (n % d == 0)
                     {
-                        if (d1 == 0)
-                            d1 = d;
-                        else d2 = d;
+                        if (div_min == 0)
+                            div_min = d;
+                        else div_max = d;
                         while (n % d == 0)
                             n /= d;
                     }
-                if (d1 == N)
+                if (div_min == N)
                     Console.WriteLine("найти сумму нельзя, так как оно простое.");
-                else if (d2 == 0)
-                    Console.WriteLine("существует лишь один простой делитель - {0}.", d1);
-                else Console.WriteLine("сумма его наибольшего и наименьшего простых множителей {0} и {1} равна {2}.", d1, d2, d1 + d2);
+                else if (div_max == 0)
+                    Console.WriteLine("существует лишь один простой делитель - {0}.", div_min);
+                else Console.WriteLine("сумма его наибольшего и наименьшего простых множителей {0} и {1} равна {2}.",
+                    div_min, div_max, div_min + div_max);
             }
         }
     }
