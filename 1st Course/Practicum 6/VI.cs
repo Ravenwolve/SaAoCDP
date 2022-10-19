@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace P1_10
 {
@@ -13,7 +13,7 @@ namespace P1_10
         }
         static void delete_coloumn(ref int[][] A, uint col)
         {
-            for (uint i = 0; i < A.Length; i++) 
+            for (uint i = 0; i < A.Length; i++)
             {
                 for (uint j = col + 1; j < A[i].Length; j++)
                     A[i][j - 1] = A[i][j];
@@ -68,12 +68,16 @@ namespace P1_10
         static void input_array(int[][] Arr)
         {
             for (ushort i = 0; i < Arr.Length; i++)
-                for (ushort j = 0; j < Arr[i].Length; j++)
-                    Arr[i][j] = int.Parse(Console.ReadLine());
+                input_array(Arr[i]);
+        }
+        static void input_array(int[] Arr)
+        {
+            for (ushort i = 0; i < Arr.Length; i++)
+                Arr[i] = int.Parse(Console.ReadLine());
         }
         static void Main(string[] args)
         {
-            Console.Write("Алгоритм: Удаление из массива все нулевые строки и столбцы: ");
+            Console.Write("Алгоритм: Удаление из массива все нулевые строки и столбцы.\nВведите размер кв. массива: ");
             int N = int.Parse(Console.ReadLine());
             int[][] A = new int[N][];
             for (int i = 0; i < N; i++)
@@ -88,4 +92,3 @@ namespace P1_10
         }
     }
 }
-
