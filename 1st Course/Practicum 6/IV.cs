@@ -29,24 +29,20 @@ namespace P1_10
             ushort count = 0;
             for (ushort i = 0; i < Arr.GetLength(0); i++)
                 for (ushort j = 0; j < Arr.GetLength(0); j++)
-                {
                     if (Arr[j, i] > 0)
                     {
                         count++;
                         break;
                     }
-                }
             int[] Result = new int[count];
             for (ushort i = 0, k = 0; i < Arr.GetLength(0); i++)
                 for (ushort j = 0; j < Arr.GetLength(0); j++)
-                {
                     if (Arr[j, i] > 0)
                     {
                         Result[k] = Arr[j, i];
                         k++;
                         break;
                     }
-                }
             return Result;
         }
         static void Main(string[] args)
@@ -55,11 +51,11 @@ namespace P1_10
             int N = int.Parse(Console.ReadLine());
             int[,] A = new int[N, N];
             input_array(A);
-/*  1    -2      -3       0
-   -5    -6      -7      -8
-    9    -10     -11     12
-   -13    14     -12     13
-            Вывод: 1 14 12 */
+            /*  1    -2      -3       0
+               -5    -6      -7      -8
+                9    -10     -11     12
+               -13    14     -12     13
+                        Вывод: 1 14 12 */
             Console.WriteLine("Ваш массив: ");
             output_array(A);
             Console.WriteLine("Получившийся массив:");
