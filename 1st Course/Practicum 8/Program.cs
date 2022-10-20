@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 
 namespace P1_10
 {
@@ -7,22 +6,12 @@ namespace P1_10
     {
         static int FindAmountOfUppercaseWords(string String)
         {
-            List<string> Words = new List<string>();
-            for (int i = 0, j = 0; j < String.Length; j++)
-                if (!char.IsLetter(String[j]))
-                {
-                    if (i != j)
-                        Words.Add(String.Substring(i, j - i));
-                    i = j + 1;
-                }
-            int Counter = Words.Count;
-            foreach (string ItemStr in Words)
-                foreach (char ItemCh in ItemStr)
-                    if (char.IsLower(ItemCh))
-                    {
-                        Counter--;
-                        break;
-                    }
+            int Counter = 0;
+            //char[] Separators = new char[34];
+            string[] Words = String.Split(Separators, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string Item in Words)
+                if (Item == Item.ToUpper())
+                    Counter++;
             return Counter;
         }
         static void Main(string[] args)
