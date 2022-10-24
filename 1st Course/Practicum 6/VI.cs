@@ -1,76 +1,75 @@
 using System;
+using System.Xml.Schema;
 
 namespace P1_10
 {
     internal class Program
     {
-        static void delete_string(ref int[][] A, uint str)
+        static void DeleteRow(ref int[][] Arr, int Row, int Length)
         {
-            for (uint i = str + 1; i < A.Length; i++)
-                A[i - 1] = A[i];
-            A[A.Length - 1] = null;
-            Array.Resize(ref A, A.Length - 1);
+            for (int i = Row + 1; i < Length; i++)
+                Arr[i - 1] = Arr[i];
+            Arr[Length - 1] = null;
         }
-        static void delete_coloumn(ref int[][] A, uint col)
+        static void DeleteColoumn(ref int[][] Arr, int Col, int Length)
         {
-            for (uint i = 0; i < A.Length; i++)
-            {
-                for (uint j = col + 1; j < A[i].Length; j++)
-                    A[i][j - 1] = A[i][j];
-                Array.Resize(ref A[i], A[i].Length - 1);
-            }
+            for (int i = 0; i < Arr.Length; i++)
+                for (int j = Col + 1; j < Length; j++)
+                    Arr[i][j - 1] = Arr[i][j];
         }
-        static void delete_all_strings(ref int[][] A)
+        static void DeleteNulls(ref int[][] Arr)
         {
-            for (uint i = 0; i < A.Length; i++)
-                for (uint j = 0; j < A[i].Length; j++)
+            int NewLength = Arr.Length;
+            for (int i = 0; i < NewLength; i++) //Алгоритм удаления нулевых строк
+                for (int j = 0; j < Arr[0].Length; j++)
                 {
-                    if (A[i][j] != 0)
+                    if (Arr[i][j] != 0)
                         break;
-                    if (j == A[i].Length - 1)
+                    if (j == Arr[i].Length - 1)
                     {
-                        delete_string(ref A, i);
-                        delete_all_strings(ref A);
-                        break;
+                        DeleteRow(ref Arr, i, NewLength--);
+                        i--;
+                        if (NewLength == 0) //Длина 0 => массив состоял из нулей. Все строки нулевые = все столбцы нулевые. Нам удобнее работать построчно.
+                        {
+                            Arr = null;
+                            return;
+                        }
                     }
                 }
-        }
-        static void delete_all_coloumns(ref int[][] A)
-        {
-            for (uint i = 0; i < A[0].Length; i++)
-                for (uint j = 0; j < A.Length; j++)
+            if (Arr.Length - NewLength != 0) //Пересоздаем массив с уплотненным размером
+                Array.Resize(ref Arr, NewLength);
+            NewLength = Arr[0].Length; //Переходим к удалению нулевых столбцов. Используем уже имеющуюся переменную (а что, удобно)
+            for (int i = 0; i < NewLength; i++) //Алгоритм удаления нулевых столбцов
+                for (int j = 0; j < Arr.Length; j++)
                 {
-                    if (A[j][i] != 0)
+                    if (Arr[j][i] != 0)
                         break;
-                    if (j == A.Length - 1)
+                    if (j == Arr.Length - 1)
                     {
-                        delete_coloumn(ref A, i);
-                        delete_all_coloumns(ref A);
-                        break;
+                        DeleteColoumn(ref Arr, i, NewLength--);
+                        i--;
                     }
                 }
+            if (Arr[0].Length - NewLength != 0) //тоже самое, что мы делали до этого, правда для каждой строки будет пересоздаваться массив и это очень не круто
+                for (int i = 0; i < Arr.Length; i++)
+                    Array.Resize(ref Arr[i], NewLength);
         }
-        static void delete_all_nulls(ref int[][] A)
-        {
-            delete_all_strings(ref A);
-            delete_all_coloumns(ref A);
-        }
-        static void print_array(int[][] Arr)
+        static void PrintArray(int[][] Arr)
         {
             for (int i = 0; i < Arr.Length; i++, Console.WriteLine())
-                print_array(Arr[i]);
+                PrintArray(Arr[i]);
         }
-        static void print_array(int[] Arr)
+        static void PrintArray(int[] Arr)
         {
             for (int i = 0; i < Arr.Length; i++)
                 Console.Write("{0}\t", Arr[i]);
         }
-        static void input_array(int[][] Arr)
+        static void InputArray(int[][] Arr)
         {
             for (ushort i = 0; i < Arr.Length; i++)
-                input_array(Arr[i]);
+                InputArray(Arr[i]);
         }
-        static void input_array(int[] Arr)
+        static void InputArray(int[] Arr)
         {
             for (ushort i = 0; i < Arr.Length; i++)
                 Arr[i] = int.Parse(Console.ReadLine());
@@ -79,16 +78,26 @@ namespace P1_10
         {
             Console.Write("Алгоритм: Удаление из массива все нулевые строки и столбцы.\nВведите размер кв. массива: ");
             int N = int.Parse(Console.ReadLine());
-            int[][] A = new int[N][];
-            for (int i = 0; i < N; i++)
-                A[i] = new int[N];
-            input_array(A);
-            Console.WriteLine("Исходный массив:");
-            print_array(A);
-            Console.WriteLine();
-            delete_all_nulls(ref A);
-            Console.WriteLine("Искомый массив:");
-            print_array(A);
+            if (N <= 0) 
+                Console.WriteLine("ОШИБКА: Нельзя создать массив такой размерности.");
+            else
+            {
+                int[][] A = new int[N][];
+                for (int i = 0; i < N; i++)
+                    A[i] = new int[N];
+                InputArray(A);
+                Console.WriteLine("Исходный массив:");
+                PrintArray(A);
+                Console.WriteLine();
+                DeleteNulls(ref A);
+                if (A == null)
+                    Console.WriteLine("Массив умер. Он состоял только из одних нулей.");
+                else
+                {
+                    Console.WriteLine("Искомый массив:");
+                    PrintArray(A);
+                }
+            }
         }
     }
 }
