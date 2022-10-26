@@ -7,7 +7,8 @@ namespace P1_10
         static int FindAmountOfUppercaseWords(string String)
         {
             int Counter = 0;
-            //char[] Separators = new char[34];
+            char[] Separators = { ' ', '\n', '\r', '"', ':', ',', '!', '?', ';', '-', '+', '=', '(', ')', '$', '%', '*', '&', '/',
+                                  '@', '\t', '\v', '[', ']', '{', '}', '<', '>', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
             string[] Words = String.Split(Separators, StringSplitOptions.RemoveEmptyEntries);
             foreach (string Item in Words)
                 if (Item == Item.ToUpper())
