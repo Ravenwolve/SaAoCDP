@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 namespace P1_10
@@ -8,9 +8,9 @@ namespace P1_10
         static void Main(string[] args)
         {
             Console.WriteLine("Алгоритм: Дан файл f, компонентами которого являются символы. Переписать в файл g все знаки препинания файла f, а в файл h – все остальные символы файла f.");
-            using (StreamReader FileInF = new StreamReader("C:/Users/Harvey/source/repos/P1-10/P1-10/f.txt", Encoding.GetEncoding(1251))) //C:/Users/sharovkv/source/repos/P1-10/P1-10/f.txt
+            using (StreamReader FileInF = new StreamReader("C:/Users/sharovkv/source/repos/P1-10/P1-10/f.txt", Encoding.GetEncoding(1251)))
             {
-                using (StreamWriter FileOutG = new StreamWriter("C:/Users/Harvey/source/repos/P1-10/P1-10/g.txt", true), FileOutH = new StreamWriter("C:/Users/Harvey/source/repos/P1-10/P1-10/h.txt", true))
+                using (StreamWriter FileOutG = new StreamWriter("C:/Users/sharovkv/source/repos/P1-10/P1-10/g.txt", true), FileOutH = new StreamWriter("C:/Users/sharovkv/source/repos/P1-10/P1-10/h.txt", true))
                 {
                     string Line = FileInF.ReadToEnd();
                     for (int i = 0; i < Line.Length; i++)
