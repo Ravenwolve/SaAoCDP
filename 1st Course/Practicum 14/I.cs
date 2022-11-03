@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -20,25 +20,24 @@ namespace P1_10
                 (FirstPoint.z - SecondPoint.z) * (FirstPoint.z - SecondPoint.z)) <= Radius * Radius;
 
         }
+        public static bool operator==(SPoint FirstPoint, SPoint SecondPoint)
+        {
+            return FirstPoint.x == SecondPoint.x && FirstPoint.y == SecondPoint.y && FirstPoint.z == SecondPoint.z;
+        }
+        public static bool operator!=(SPoint FirstPoint, SPoint SecondPoint) { return !(FirstPoint == SecondPoint); }
     }
     internal class Program
     {
-        static double Mod(double Number)
-        {
-            if (Number >= 0)
-                return Number;
-            else return -Number;
-        }
         static void Main(string[] args)
         {
             Console.WriteLine("Алгоритм: Найти такую точку, что шар радиуса R с центром в этой точке содержит максимальное число точек заданного множества.");
-            using (StreamReader FileIn = new StreamReader("C:/Users/Harvey/source/repos/P1-10/P1-10/input.txt", Encoding.GetEncoding(1251))) //C:/Users/sharovkv/source/repos/P1-10/P1-10/f.txt
+            using (StreamReader FileIn = new StreamReader("C:/Users/sharovkv/source/repos/P1-10/P1-10/input.txt", Encoding.GetEncoding(1251)))
             {
                 string Line;
                 string[] Nums;
                 char[] Separators = { ' ', ',', ';' };
                 SPoint Temp = new SPoint();
-                List<SPoint> Points = new List<SPoint>();
+                HashSet<SPoint> Points = new HashSet<SPoint>();
                 while ((Line = FileIn.ReadLine()) != null)
                 {
                     Nums = Line.Split(Separators, StringSplitOptions.RemoveEmptyEntries);
@@ -47,6 +46,8 @@ namespace P1_10
                     Temp.z = double.Parse(Nums[2]);
                     Points.Add(Temp);
                 }
+                foreach (SPoint Item in Points)
+                    Console.WriteLine("({0}; {1}; {2})", Item.x, Item.y, Item.z);
                 Console.Write("Точки успешно считаны. Введите значение радиуса R: ");
                 uint R = uint.Parse(Console.ReadLine());
                 short Counter = -1, MaxCounter = 0;
@@ -69,4 +70,3 @@ namespace P1_10
         }
     }
 }
-
