@@ -1,16 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
+using System;
 using System.Text;
-using System.Xml.Schema;
 
 namespace P1_10
 {
     internal class StringDoing
     {
-        static StringBuilder line;
+        internal StringBuilder line;
         public int Length { get { return line.Length; } }
-        public StringBuilder Line { set { line = value; } get { return line; } }
+        public StringBuilder Line { set { line = new StringBuilder(Console.ReadLine()); } get { return line; } }
         public StringDoing() { line = new StringBuilder(""); }
         public StringDoing(string StringData) { line = new StringBuilder(StringData); }
         public int this[int i] { get { return line[i]; } }
@@ -22,24 +19,33 @@ namespace P1_10
                     count++;
             return count;
         }
-        public void ToLower() //Метод преобразования строки в верхний регистр
+        public StringDoing ToLower() //Метод преобразования строки в верхний регистр
         {
             if (Length != 0)
-            {
-                char[] temps = new char[line.Length];
-                for (int i = 0; i < Length; i++)
-                    temps[i] = char.ToLower(line[i]);
-                line = new StringBuilder(new string (temps));
-            }
+                return new StringDoing(line.ToString().ToLower());
+            return null;
         }
-        public void RemovePunctuation() //Метод удаления всех знаков пунктуации
+        public StringDoing ToUpper() //Метод преобразования строки в верхний регистр
         {
             if (Length != 0)
-            {
+                return new StringDoing(line.ToString().ToUpper());
+            return null;
+        }
+        public StringDoing RemovePunctuation() //Метод удаления всех знаков пунктуации
+        {
+            if (Length != 0)
+            { //Разъединяет по знакам пунктации строки в массив строк, затем объединяет его в одну строку
                 char[] separators = { ',', ':', ';', '-', '.', '?', '!' };
-                Line = new StringBuilder(string.Join("", line.ToString().Split(separators, StringSplitOptions.RemoveEmptyEntries)));
+                return new StringDoing(string.Join("", line.ToString().Split(separators, StringSplitOptions.RemoveEmptyEntries)));
             }
+            return null;
         }
+        public static StringDoing operator + (StringDoing line) { return line.ToUpper(); }
+        public static StringDoing operator -(StringDoing line) { return line.ToLower(); }
+        public static bool operator true(StringDoing line) { return line.Length != 0; }
+        public static bool operator false(StringDoing line) { return line.Length == 0; }
+        public static bool operator &(StringDoing line_1, StringDoing line_2) { return line_1 == line_2; }
         public override string ToString() { return line.ToString(); }
+        public static implicit operator StringBuilder(StringDoing line) { return line.Line; }
     }
 }
