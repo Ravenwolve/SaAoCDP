@@ -39,8 +39,9 @@ namespace P1_10
             if (c > 0)
                 this.c = c;
         }
-        public override double Square() {
-            double hP = Perimeter()/2;
+        public override double Square()
+        {
+            double hP = Perimeter() / 2;
             return Math.Sqrt(hP * (hP - a) * (hP - b) * (hP - c));
         }
         public override double Perimeter() { return a + b + c; }

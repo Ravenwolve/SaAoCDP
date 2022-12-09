@@ -7,7 +7,7 @@ namespace P1_10
     internal class Rectangle : Figure
     {
         protected double a, b;
-        public Rectangle() 
+        public Rectangle()
         {
             a = 0;
             b = 0;

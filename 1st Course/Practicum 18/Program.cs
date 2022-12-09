@@ -68,7 +68,7 @@ namespace P1_10
                     }
                 }
                 foreach (var Item in ResultArray)
-                    Item.Show();
+                    Console.WriteLine("{0}:\t{1}", Item.GetType(), Item);
             }
         }
     }
