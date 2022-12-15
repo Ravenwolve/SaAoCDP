@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.IO;
 using System.Text;
 
@@ -9,7 +8,7 @@ namespace P1_10
     {
         static void Main(string[] args)
         {
-            using (StreamReader FileIn = new StreamReader("C:/Users/Harvey/source/repos/P1-10/P1-10/input.txt", Encoding.GetEncoding(1251)))
+            using (StreamReader FileIn = new StreamReader("C:/Users/sharovkv/source/repos/P1-10/P1-10/input.txt", Encoding.GetEncoding(1251)))
             {
                 string Line;
                 string[] StrFigures;
@@ -19,7 +18,8 @@ namespace P1_10
                 for (uint i = 0; i < n && (Line = FileIn.ReadLine()) != null; i++)
                 {
                     StrFigures = Line.Split(Separators, StringSplitOptions.RemoveEmptyEntries);
-                    switch (StrFigures[0][0]) {
+                    switch (StrFigures[0][0])
+                    {
                         case 'C':
                             switch (StrFigures.Length)
                             {
@@ -68,7 +68,7 @@ namespace P1_10
                     }
                 }
                 foreach (var Item in ResultArray)
-                    Console.WriteLine("{0}:\t{1}", Item.GetType(), Item);
+                    Console.WriteLine("{0}:\t{1}", Item.GetType().Name, Item);
             }
         }
     }
