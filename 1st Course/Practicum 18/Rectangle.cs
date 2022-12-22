@@ -1,7 +1,3 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
 namespace P1_10
 {
     internal class Rectangle : Figure
@@ -9,16 +5,12 @@ namespace P1_10
         protected double a, b;
         public Rectangle()
         {
-            a = 0;
-            b = 0;
+            a = b = 0;
         }
         public Rectangle(double side)
         {
             if (side > 0)
-            {
-                a = side;
-                b = side;
-            }
+                a = b = side;
         }
         public Rectangle(double length, double width)
         {
@@ -27,8 +19,22 @@ namespace P1_10
             if (width > 0)
                 b = width;
         }
-        public override double Square() { return a * b; }
-        public override double Perimeter() { return a + b; }
-        public override string ToString() { return a.ToString() + 'X' + b.ToString(); }
+        public Rectangle(Rectangle Object)
+        {
+            a = Object.a;
+            b = Object.b;
+        }
+        public override double Square() 
+        { 
+            return a * b; 
+        }
+        public override double Perimeter()
+        {
+            return a + b;
+        }
+        public override string ToString()
+        {
+            return a.ToString() + 'x' + b.ToString();
+        }
     }
 }
